@@ -1,5 +1,5 @@
 
-const superHeroes = [
+const state = [
     {
         id: 1,
         name: 'Batman'
@@ -18,16 +18,27 @@ const superHeroes = [
     }
 ];
 
-// const superHeroesCopy = [...superHeroes];
-//El operador Spread viene bien si sabemos que los cambios que se harán
-//serán primitivos los detalles dentro del arreglo. 
+//Acción que queremos usar para modificar el 'state':
+const index = 1;
+const newName = 'Green Lantern';
 
-const superHeroesCopy = structuredClone(superHeroes);
-//Con este, podemos hacer el cambio a la copia del array original, sin 
-//alterar el superHeroes
+//Queremos cambiar el nombre de Superman a Green lantern:
+// const newState = state.map( (hero, i) => {
 
+//     if ( i === index ) {
+//         hero.name = newName;
+//     }
 
-superHeroesCopy[0].name = 'Green Lantern';
+//     return {...hero};
+// });
 
-console.table( superHeroes );
-console.table( superHeroesCopy );
+const newState = state.copyWithin(index, {
+    ...state.at(index),
+    name: newName
+});
+
+state[0].name = 'Volcan Negro';
+
+console.table(newState);
+
+console.log('El último: ', state.at(0));
